@@ -6,7 +6,7 @@
         path = require('path'),
         program = require('commander'),
         targz = require('tar.gz'),
-        Y = require('yui').use('promise');
+        Y = require('yui').use('promise'),
 
         outputDir,
         platformURI = {
@@ -35,16 +35,54 @@
         .parse(process.argv);
 
     // download all dist files for the specified platforms
-    
+
     // create temp directory
     outputDir = path.resolve(program.dist, 'temp');
 
     fs.removeSync(outputDir);
     fs.mkdirsSync(outputDir);
 
-    function copyNodeJS(value) {
+    function copyItself(value) {
         return new Y.Promise(function(resolve, reject) {
             
+        });
+    }
+
+    function copyNodeJS(value) {
+        return new Y.Promise(function(resolve, reject) {
+            fs.copy(value.file, value.wrap, function(error) {
+                if (error) {
+                    reject(error);
+                }
+                else {
+                    resolve(value);
+                }
+            });
+        });
+    }
+
+    function copyScript(value) {
+        return new Y.Promise(function(resolve, reject) {
+            var dirName,
+                fileName;
+
+            dirName = value.bin + path.sep;
+
+            if (value.platform.indexOf('win') === 0) {
+                fileName = 'run.bat';
+            }
+            else {
+                fileName = 'run.sh';
+            }
+
+            fs.copy(path.resolve(dirName, path.sep, fileName), function(error) {
+                if (error) {
+                    reject(error);
+                }
+                else {
+                    resolve(value);
+                }
+            });
         });
     }
 
@@ -65,7 +103,7 @@
                         uri: uri
                     });
                 }
-            }
+            });
         });
     }
 
@@ -93,7 +131,7 @@
                             platform: platform
                         });
                     }
-                }
+                });
             }
             else {
                 resolve({
@@ -178,7 +216,9 @@
                     .then(prepareWrapDir)
                     .then(copyNodeJS)
                     .then(copyScript)
-                    .then(copyItself, showError);
+                    .then(copyItself)
+                    .then(installDependencies)
+                    .then(makeArchive, showError);
 
                 request = http.get(uri, fileName, function(fileName, uri, error, result) {
                     var dirToWrap,
