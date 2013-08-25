@@ -1,4 +1,4 @@
-(function(){
+(function() {
     'use strict';
 
     var fs = require('fs-extra');
@@ -37,4 +37,4 @@
             this.wait();
         }
     }));
-})();
+}());

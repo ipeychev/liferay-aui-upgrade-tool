@@ -1,4 +1,4 @@
-(function(){
+(function() {
 	'use strict';
 
 	var YUITest = require('yuitest');
@@ -24,4 +24,4 @@
 			YUITest.Assert.isTrue(content.indexOf('cssClass="test">') !== -1, 'inputCSSClass as single attrbiute should be transformed.');
 		}
 	}));
-})();
+}());

@@ -1,4 +1,4 @@
-(function(){
+(function() {
 	'use strict';
 
 	var YUITest = require('yuitest');
@@ -36,4 +36,4 @@
 			YUITest.Assert.isTrue(contentJS.indexOf('var cssClass = "foo123";') !== -1, 'aui-foo123 should be transformed.');
 		}
 	}));
-})();
+}());

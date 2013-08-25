@@ -7,18 +7,14 @@
 
 	var fs = require('fs');
 
-	var renameCSSClasses = (new (require(path.resolve(__dirname, '../lib/rename-css-classes.js')).RenameCSSClasses)());
+	var renameCSSClasses = (new (require(path.resolve(__dirname, '../lib/change-handler-to-on-click.js')).RenameCSSClasses)());
 
-	var testDataCSS = fs.readFileSync(path.resolve(__dirname, '../data/data-rename-css-classes.css'), 'utf8');
-	var testDataJS = fs.readFileSync(path.resolve(__dirname, '../data/data-rename-css-classes.js'), 'utf8');
-	var testDataJSP = fs.readFileSync(path.resolve(__dirname, '../data/data-rename-css-classes.jsp'), 'utf8');
+	var testDataJS = fs.readFileSync(path.resolve(__dirname, '../data/data-change-handler-to-on-click.js'), 'utf8');
 
-	var contentCSS = renameCSSClasses.process(testDataCSS);
 	var contentJS = renameCSSClasses.process(testDataJS);
-	var contentJSP = renameCSSClasses.process(testDataJSP);
-
+	
 	YUITest.TestRunner.add(new YUITest.TestCase({
-		name: "Test Rename CSS Classes",
+		name: "Test Rename Handler to onClick in Toolbar",
 
 		'test rename CSS classes from CSS': function() {
 			YUITest.Assert.isTrue(contentCSS.indexOf('.test123 .close-panel {') !== -1, '.test123 .btn-cancel { should be transformed.');
