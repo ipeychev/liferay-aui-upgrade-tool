@@ -1,9 +1,9 @@
 WARNING
 =============
 
-THIS PROJECT HAS BEEN MOVED TO [LIFERAY](https://github.com/ipeychev/liferay-aui-upgrade-tool/) REPOSITORY.
+THIS PROJECT HAS BEEN MOVED TO [LIFERAY](https://github.com/liferay/liferay-aui-upgrade-tool/) REPOSITORY.
 
-Please send any patches or fill issues on its new [home](https://github.com/ipeychev/liferay-aui-upgrade-tool/).
+Please send any patches or fill issues on its new [home](https://github.com/liferay/liferay-aui-upgrade-tool/).
 
 05.09.2013
 
